@@ -1,110 +1,134 @@
-### **Introduction to Databases**
-A **database** is an organized collection of data that can be accessed, managed, and updated efficiently. It allows storing data in a structured manner, making it easy to retrieve and manipulate.
+# Getting Started with UV and FastAPI
 
-### **Types of Databases**
-1. **Relational Databases (SQL)**
-   - Uses structured schema (tables with rows and columns).
-   - Data is stored in a tabular format.
-   - Ensures ACID (Atomicity, Consistency, Isolation, Durability) properties.
-   - Examples: MySQL, PostgreSQL, SQLite, SQL Server.
+## UV Configuration and Installation
 
-2. **Non-Relational Databases (NoSQL)**
-   - Schema-less or dynamic schema.
-   - Can store data in different formats like documents, key-value pairs, graphs, or wide-columns.
-   - Provides high scalability and flexibility.
-   - Examples: MongoDB, Cassandra, Redis, Firebase.
+### Install UV
+- Use the official installer for UV:
+- On Windows (using PowerShell):
+  ```powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+  ```
 
----
+### Install Project Dependencies
+- To install all dependencies for an already created project:
+  ```bash
+  uv install --no-root
+  ```
 
-### **SQL vs NoSQL**
-| Feature       | SQL (Relational)  | NoSQL (Non-Relational)  |
-|--------------|------------------|------------------------|
-| Structure    | Tables (rows & columns) | Documents, Key-Value, Graphs |
-| Schema       | Fixed schema     | Dynamic schema |
-| Scalability  | Vertical Scaling | Horizontal Scaling |
-| Transactions | ACID Compliance  | BASE (Basically Available, Soft state, Eventual consistency) |
-| Query Language | SQL | Query languages like MongoDB Query Language (MQL) |
-| Use Case     | Structured Data, Banking, ERP | Big Data, Real-time apps, JSON-based |
+### Create a New Project
+- To initialize a new Poetry project:
+  ```bash
+  uv init <Project_name>
+  ```
 
----
-
-### **MongoDB and PyMongo CRUD Operations**
-MongoDB is a **NoSQL document-based database**, and **PyMongo** is a Python library to interact with MongoDB.
-
-#### **1. Install PyMongo**
-```sh
-pip install pymongo
-```
-
-#### **2. Connect to MongoDB**
-```python
-from pymongo import MongoClient
-
-client = MongoClient("mongodb://localhost:27017/")
-db = client["students_db"]
-collection = db["students"]
-```
+### Manage Dependencies
+- To add a new dependency:
+  ```bash
+  uv add <package-name>
+  ```
+- To remove a dependency:
+  ```bash
+  uv remove <package-name>
+  ```
 
 ---
 
-### **CRUD Operations in PyMongo**
-
-#### **Create (Insert Data)**
-```python
-# Insert One
-student = {"name": "Ali", "age": 22, "course": "Database"}
-collection.insert_one(student)
-
-# Insert Multiple
-students = [
-    {"name": "Sara", "age": 21, "course": "AI"},
-    {"name": "Ahmed", "age": 23, "course": "Web Dev"}
-]
-collection.insert_many(students)
-```
+## Installing FastAPI and Uvicorn
+- Add FastAPI with standard dependencies:
+  ```bash
+  uv add "fastapi[standard]"
+  ```
+- Add Uvicorn (ASGI server):
+  ```bash
+  uv add uvicorn
+  ```
 
 ---
 
-#### **Read (Retrieve Data)**
-```python
-# Find One
-student = collection.find_one({"name": "Ali"})
-print(student)
+## Running Files
 
-# Find All
-for student in collection.find():
-    print(student)
+### Run with Python
+- Use `poetry run` to execute Python scripts:
+  ```bash
+  uv run python <relative-path-to-file>
+  ```
+  Example:
+  ```bash
+  uv run python 07-llm-and-prompt-engineering/01_gemeni_llm.py
+  ```
 
-# Find with Condition
-for student in collection.find({"course": "AI"}):
-    print(student)
-```
-
----
-
-#### **Update (Modify Data)**
-```python
-# Update One
-collection.update_one({"name": "Ali"}, {"$set": {"age": 23}})
-
-# Update Many
-collection.update_many({"course": "AI"}, {"$set": {"course": "Machine Learning"}})
-```
+### Run with FastAPI/Uvicorn
+- Use `uv run` with Uvicorn to serve FastAPI applications:
+  ```bash
+  uv run uvicorn <relative-path-to-module>:app --reload
+  ```
+  - Replace `/` with `.` in the path, and change `.py` to `:app`.
+  - Example:
+    ```bash
+    poetry run uvicorn 09-langgraph.websocket-agent.ws_agent_server_gemini:app --reload
+    ```
 
 ---
 
-#### **Delete (Remove Data)**
-```python
-# Delete One
-collection.delete_one({"name": "Ali"})
 
-# Delete Many
-collection.delete_many({"course": "Machine Learning"})
-```
+## Course Outline
+### Course Outline: Cloud-Native Applied AI Agentic Developer
 
----
+1. **Python Foundations**
+   - Overview of Python for AI development
+   - Essential libraries and best practices
 
-### **Bonus: Advanced MongoDB Queries**
-- **Sorting**: `collection.find().sort("age", -1)` (Descending)
-- **Limiting Results**: `collection.find().limit(5)`
-- **Projection (Selecting Fields)**: `collection.find({}, {"_id": 0, "name": 1})`
+2. **AI Theory & Terminologies**
+   - Key AI concepts and definitions
+   - Understanding machine learning, deep learning, and reinforcement learning
+   - Ethics and bias in AI
+
+3. **FastAPI**
+   - Introduction to FastAPI for building APIs
+   - Designing, implementing, and testing AI-powered APIs
+
+4. **Databases**
+   - **SQL Databases**: Basics and advanced queries
+   - **NoSQL Databases**: Understanding document, key-value, and graph databases
+
+5. **Third-Party Libraries**
+   - **NumPy**: Numerical computing
+   - **Pandas**: Data manipulation and analysis
+   - **OpenCV**: Computer vision basics and applications
+
+6. **Model Development Lifecycle**
+   - Model building and training using **Keras**
+   - Data preprocessing, validation, and evaluation
+   - Deploying AI models
+
+7. **Large Language Models (LLMs)**
+   - Overview of LLMs: **Gemini**, **OpenAI**, and **Allama**
+   - Selecting the right LLM for applications
+
+8. **LLM Framework: LangChain**
+   - Building applications with LangChain
+   - Advanced techniques for chaining and managing LLMs
+
+9. **Agentic Framework: LangGraph**
+   - Overview and integration with LangChain
+   - Developing agentic systems for AI workflows
+
+10. **Agentic Framework: CrewAI**
+   - Overview and integration with Mulit Ai Agents
+   - Developing agentic systems for AI workflows
+
+11. **Cloud Computing & DevOps**
+    - **Docker**: Containerizing AI applications
+    - **Kubernetes**: Orchestrating containers at scale
+    - Managing deployments in cloud-native environments
+
+12. **Frontend Development with Next.js**
+    - Designing chatbot UIs
+    - Building interactive agent frontends for seamless user experience
+
+This structured course ensures a comprehensive journey from fundamental concepts to advanced cloud-native AI development, emphasizing both backend and frontend technologies.
+
+
+![alt text](outline.png)
+
+### Agents
+![alt text](agent.png)
