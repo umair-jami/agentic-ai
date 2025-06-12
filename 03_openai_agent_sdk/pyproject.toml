@@ -1,0 +1,14 @@
+[project]
+name = "03-openai-agent-sdk"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai-agents>=0.0.17",
+]
+
+[tool.uv.workspace]
+members = [
+    "02_agents",
+]
