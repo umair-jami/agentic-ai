@@ -64,7 +64,7 @@
   - Replace `/` with `.` in the path, and change `.py` to `:app`.
   - Example:
     ```bash
-    poetry run uvicorn 09-langgraph.websocket-agent.ws_agent_server_gemini:app --reload
+    uv run uvicorn 09-langgraph.websocket-agent.ws_agent_server_gemini:app --reload
     ```
 
 ---
