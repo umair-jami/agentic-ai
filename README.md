@@ -126,9 +126,3 @@
     - Building interactive agent frontends for seamless user experience
 
 This structured course ensures a comprehensive journey from fundamental concepts to advanced cloud-native AI development, emphasizing both backend and frontend technologies.
-
-
-![alt text](outline.png)
-
-### Agents
-![alt text](agent.png)
