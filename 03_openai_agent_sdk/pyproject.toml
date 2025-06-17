@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "openai-agents>=0.0.17",
+    "pymongo[srv]>=4.13.1",
 ]
 
 [tool.uv.workspace]
